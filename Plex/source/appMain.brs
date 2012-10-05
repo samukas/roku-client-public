@@ -153,6 +153,12 @@ Sub initTheme()
     theme.GridScreenLogoSD  = "pkg:/images/logo_final_SD.png"
     theme.GridScreenOverhangHeightSD = "66"
 
+
+	' Temporary hack. The subtitles color should be set after enabling it in Preferences.
+	subtitleColor = RegRead("subtitle_color","preferences","#ffff00")
+	theme.SubtitleColor = subtitleColor
+	
+
     ' We want to use a dark background throughout, just like the default
     ' grid. Unfortunately that means we need to change all sorts of stuff.
     ' The general idea is that we have a small number of colors for text

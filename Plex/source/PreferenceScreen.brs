@@ -163,6 +163,18 @@ Function createPreferencesScreen(viewController) As Object
         heading: "Allow Roku to show soft subtitles itself, or burn them in to videos?",
         default: "1"
     }
+    
+    ' Subtitle color (soft subtitles only)
+    sub_colors = [
+        { title: "Yellow", EnumValue: "#ffff00", ShortDescriptionLine2: "Use yellow color for soft subtitles." },
+        { title: "White", EnumValue: "#ffffff", ShortDescriptionLine2: "Use white color for soft subtitles." }
+
+    ]
+    obj.Prefs["subtitle_color"] = {
+        values: sub_colors,
+        heading: "Color for Soft Subtitles",
+        default: "#ffff00"
+    }
 
     ' Screensaver options
     screensaver = [
@@ -194,6 +206,7 @@ Sub showPreferencesScreen()
     m.AddItem({title: "Quality"}, "quality", m.GetEnumValue("quality"))
     m.AddItem({title: "Direct Play"}, "directplay", m.GetEnumValue("directplay"))
     m.AddItem({title: "Subtitles"}, "softsubtitles", m.GetEnumValue("softsubtitles"))
+    m.AddItem({title: "Subtitles Color"}, "subtitle_color", m.GetEnumValue("subtitle_color"))
     m.AddItem({title: "Slideshow"}, "slideshow")
     m.AddItem({title: "Screensaver"}, "screensaver", m.GetEnumValue("screensaver"))
     m.AddItem({title: "Logging"}, "debug")
@@ -236,7 +249,7 @@ Sub showPreferencesScreen()
                         end if
                     end if
                     m.Screen.SetItem(msg.GetIndex(), {title: getCurrentMyPlexLabel(m.myplex)})
-                else if command = "quality" OR command = "level" OR command = "fivepointone" OR command = "directplay" OR command = "softsubtitles" OR command = "screensaver" then
+                else if command = "quality" OR command = "level" OR command = "fivepointone" OR command = "directplay" OR command = "softsubtitles" OR command = "subtitle_color" OR command = "screensaver" then
                     m.HandleEnumPreference(command, msg.GetIndex())
                 else if command = "slideshow" then
                     screen = createSlideshowPrefsScreen(m.ViewController)
